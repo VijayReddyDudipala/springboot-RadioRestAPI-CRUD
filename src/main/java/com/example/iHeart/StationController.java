@@ -1,7 +1,7 @@
 package com.example.iHeart;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +20,7 @@ public class StationController {
 		return stationService.getAll();
 	}
 	@RequestMapping("/stations/{id}")
-	public Station getStation(@PathVariable("id") String identification) {
+	public Optional<Station> getStation(@PathVariable("id") String identification) {
 		return stationService.getStationById(identification);
 	}
 	@RequestMapping("/stations/hd")

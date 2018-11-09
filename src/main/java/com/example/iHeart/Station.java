@@ -2,12 +2,16 @@ package com.example.iHeart;
 
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@Entity
 @Getter @Setter @NoArgsConstructor
 public class Station {
+	@Id
 	private String stationId;
 	private String name;
 	private String callSign;
