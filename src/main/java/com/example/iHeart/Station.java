@@ -4,26 +4,37 @@ package com.example.iHeart;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.genre.Genre;
+
+
 @Entity
-@Getter @Setter @NoArgsConstructor
 public class Station {
 	@Id
 	private String stationId;
 	private String name;
 	private String callSign;
 	private boolean hdEnabled;
-	public Station(String stationId, String name, String callSign, boolean hdEnabled) {
+	@ManyToOne(targetEntity = Genre.class)
+	private Genre genre;//many stations may belong to a genre
+	public Station(String stationId, String name, String callSign, boolean hdEnabled,String genreId) {
 		super();
 		this.stationId = stationId;
 		this.name = name;
 		this.callSign = callSign;
 		this.hdEnabled = hdEnabled;
+		this.genre=new Genre(genreId,"","");
 	}
 	
+	public Genre getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
 	public Station() {
 		super();
 	}

@@ -1,4 +1,4 @@
-package com.example.iHeart;
+package com.example.genre;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,40 +11,37 @@ import org.springframework.stereotype.Service;
 import com.example.exception.StationNotFoundException;
 
 @Service
-public class StationService {
+public class GenreService {
 	@Autowired
-	private StationRepo stationRepository;
+	private GenreRepo genreRepository;
 	/*private List<Station> stations= new ArrayList<Station>(Arrays.asList(
 			new Station("1","Pop","P",true),
 			new Station("2","Rock","R",true),
-			new Station("3","Metallica","M",false),
+			new Station("3","Mettalica","M",false),
 			new Station("4","Opera","O",false)				
 			));*/
 	
-	public List<Station> getAll(String genreId){
-		List<Station>  stations=new ArrayList<>();
-		stationRepository.findByGenreGenreId(genreId).forEach(stations::add);
-		return stations;
-		/*List<Station>  stations=new ArrayList<>();
-		stationRepository.findAll().forEach(stations::add);
-		return stations;*/
+	public List<Genre> getAll(){
+		List<Genre>  genres=new ArrayList<>();
+		genreRepository.findAll().forEach(genres::add);
+		return genres;
 		//return stations;
 	}
 
-	public Optional<Station> getStationById(String id) {
+	public Optional<Genre> getGenreById(String id) {
 		
 		//return stations.stream().filter(s -> s.getStationId().equals(id)).findFirst().get();
 		
-		return stationRepository.findById(id);
+		return genreRepository.findById(id);
 	}
 	
-	public void addStation(Station s) {
+	public void addGenre(Genre s) {
 		//stations.add(s);
-		stationRepository.save(s);
+		genreRepository.save(s);
 	}
 
-	public void updateStation(Station s) {
-		stationRepository.save(s);
+	public void updateGenre(Genre s, String identification) {
+		genreRepository.save(s);
 		
 		/*for(int i=0;i<stations.size();i++) {
 			Station x=stations.get(i);
@@ -56,9 +53,8 @@ public class StationService {
 		
 	}
 
-	public void deleteStation(String identification) {
-		stationRepository.deleteById(identification);
-		
+	public void deleteGenre(String identification) {
+		genreRepository.deleteById(identification);		
 		//stations.removeIf(s -> s.getStationId().equals(identification));
 		/*for(int i=0;i<stations.size();i++) {
 			Station x=stations.get(i);
@@ -69,24 +65,24 @@ public class StationService {
 			}
 		}*/
 	}
-
-	public List<Station> getStationHd() {
+	public Optional<Genre> getGenreByName(String name) {
+		return genreRepository.findByName(name);
+	}
+	/*public List<Genre> getStationHd() {
 		boolean status=true;
-		return stationRepository.findAllByHdEnabled(status);
-		/*List<Station> hdStations=new ArrayList<>();
+		return genreRepository.findAllByHdEnabled(status);
+		List<Station> hdStations=new ArrayList<>();
 		for(int i=0;i<stations.size();i++) {
 			Station x=stations.get(i);
 			if(x.isHdEnabled()) {
 				hdStations.add(x);				
 			}
 		}
-		return hdStations;*/
+		return hdStations;
 		//return stations.stream().filter(s -> s.isHdEnabled());
 		
-	}
+	}*/
 
-	public Optional<Station> getStationByName(String name) {
-		return stationRepository.findByName(name);
-	}
+	
 	
 }
